@@ -1,0 +1,38 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "*"
+
+jobs:
+  build:
+    name: Create Release
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          tools: composer:v2
+          coverage: none
+
+      - name: Install dependencies
+        run: composer install --no-dev --prefer-dist --no-progress
+
+      - name: Prepare plugin folder
+        run: |
+          rm -rf pmpro_uddoktapay  # Ensure no previous folder exists
+          mkdir pmpro_uddoktapay
+          rsync -av --progress . pmpro_uddoktapay --exclude pmpro_uddoktapay --exclude .git --exclude .github --exclude .gitignore --exclude composer.json --exclude composer.lock --exclude README.md --exclude LICENSE --exclude .editorconfig --exclude phpcs.xml.dist --exclude vendor/bin
+          zip -r uddoktapay.zip pmpro_uddoktapay
+
+      - name: Create GitHub release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: uddoktapay.zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

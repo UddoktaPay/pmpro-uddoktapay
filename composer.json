@@ -1,0 +1,35 @@
+{
+    "name": "uddoktapay/pmpro-uddoktapay",
+    "description": "UddoktaPay Payment Gateway for Paid Memberships Pro",
+    "type": "wordpress-plugin",
+    "license": "GPL-2.0-or-later",
+    "autoload": {
+        "psr-4": {
+            "UddoktaPay\\PMPro\\": "src/"
+        },
+        "classmap": [
+            "src/Gateway/PMProGateway_UddoktaPay.php"
+        ]
+    },
+    "authors": [
+        {
+            "name": "UddoktaPay",
+            "email": "support@uddoktapay.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.4"
+    },
+    "require-dev": {
+        "wp-coding-standards/wpcs": "^3.0"
+    },
+    "scripts": {
+        "phpcs": "phpcs",
+        "phpcbf": "phpcbf"
+    },
+    "config": {
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        }
+    }
+}
