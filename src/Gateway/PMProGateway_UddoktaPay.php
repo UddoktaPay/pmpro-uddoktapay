@@ -175,8 +175,12 @@ class PMProGateway_UddoktaPay extends PMProGateway {
 	 * @return bool Modified show value.
 	 */
 	public function checkoutDefaultSubmitButton( $show ) {
+		global $pmpro_requirebilling;
 		$display_name = get_option( 'pmpro_uddoktapay_display_name' );
 		$button_text  = empty( $display_name ) ? 'Pay with Bangladeshi Methods' : $display_name;
+		if ( ! $pmpro_requirebilling ) {
+			$button_text = __( 'Submit and Confirm', 'pmpro-uddoktapay' );
+		}
 		include_once PMPRO_UDDOKTAPAY_DIR . '/src/Views/submit-button.php';
 		return false;
 	}
