@@ -72,7 +72,7 @@ class NoticeHandler {
 			wp_kses(
 				sprintf(
 					/* translators: %s: Settings page URL */
-					esc_html__(
+					__(
 						'Thank you for activating the Paid Memberships Pro: UddoktaPay Add On. <a href="%s">Visit the payment settings page</a> to configure the UddoktaPay Payment Gateway.',
 						'pmpro-uddoktapay'
 					),
