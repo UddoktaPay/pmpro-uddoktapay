@@ -72,7 +72,7 @@ For support, please email support@uddoktapay.com.
 
 ## License
 
-This project is licensed under the GPL v3 or later - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT - see the [LICENSE](LICENSE) file for details.
 
 ## Changelog
 
