@@ -2,7 +2,7 @@
     "name": "uddoktapay/pmpro-uddoktapay",
     "description": "UddoktaPay Payment Gateway for Paid Memberships Pro",
     "type": "wordpress-plugin",
-    "license": "GPL-2.0-or-later",
+    "license": "MIT",
     "autoload": {
         "psr-4": {
             "UddoktaPay\\PMPro\\": "src/"
