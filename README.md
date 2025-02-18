@@ -73,8 +73,3 @@ For support, please email support@uddoktapay.com.
 ## License
 
 This project is licensed under the MIT - see the [LICENSE](LICENSE) file for details.
-
-## Changelog
-
-### 1.0.0
-- Initial release
