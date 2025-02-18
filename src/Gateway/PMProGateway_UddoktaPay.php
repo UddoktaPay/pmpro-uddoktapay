@@ -131,7 +131,7 @@ class PMProGateway_UddoktaPay extends PMProGateway {
 	 * @return array Modified payment options.
 	 */
 	public function paymentOptions( $options ) {
-		return array_merge( self::getGatewayOptions(), $options );
+		return array_merge( $this->getGatewayOptions(), $options );
 	}
 
 	/**
