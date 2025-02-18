@@ -22,7 +22,7 @@ The UddoktaPay Gateway add-on for Paid Memberships Pro allows you to accept paym
 
 ## Installation
 
-1. Download [uddoktapay.zip](https://github.com/UddoktaPay/pmpro-uddoktapay/releases/download/1.0.0/uddoktapay.zip)  from this repository
+1. Download [uddoktapay.zip](https://github.com/UddoktaPay/pmpro-uddoktapay/releases/download/1.0.1/uddoktapay.zip)  from this repository
 2. Go to WordPress Dashboard → Plugins → Add New
 3. Click "Upload Plugin" at the top
 4. Upload the `uddoktapay.zip` file

@@ -4,7 +4,7 @@ Tags: paid memberships pro, pmpro, payment gateway, uddoktapay, bangladesh
 Requires at least: 6.2
 Tested up to: 6.7.1
 Requires PHP: 7.4
-Stable tag: 1.0.0
+Stable tag: 1.0.1
 License: MIT
 License URI: https://opensource.org/licenses/MIT
 
@@ -60,11 +60,6 @@ Yes, SSL is required for accepting payments securely through UddoktaPay.
 1. UddoktaPay settings in PMPro
 2. Checkout page with UddoktaPay payment option
 3. UddoktaPay payment interface
-
-== Changelog ==
-
-= 1.0.0 =
-* Initial release
 
 == Support ==
 
