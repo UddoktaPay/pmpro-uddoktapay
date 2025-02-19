@@ -3,7 +3,7 @@
  * Plugin Name: Paid Memberships Pro - UddoktaPay Gateway
  * Plugin URI: https://github.com/UddoktaPay/pmpro-uddoktapay
  * Description: UddoktaPay Gateway integration for Paid Memberships Pro
- * Version: 1.0.1
+ * Version: 1.0.2
  * Requires at least: 6.2
  * Requires PHP: 7.4
  * Author: UddoktaPay
