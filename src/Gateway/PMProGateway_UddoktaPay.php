@@ -43,17 +43,17 @@ class PMProGateway_UddoktaPay extends PMProGateway {
 	 *
 	 * @since 1.0.0
 	 */
-	public function init() {
-		add_filter( 'pmpro_gateways', array( $this, 'gateways' ) );
-		add_filter( 'pmpro_gateways_with_pending_status', array( $this, 'addPendingStatus' ) );
-		add_filter( 'pmpro_payment_options', array( $this, 'paymentOptions' ) );
-		add_filter( 'pmpro_payment_option_fields', array( $this, 'paymentOptionFields' ), 10, 2 );
+	public static function init() {
+		add_filter( 'pmpro_gateways', array( 'PMProGateway_UddoktaPay', 'gateways' ) );
+		add_filter( 'pmpro_gateways_with_pending_status', array( 'PMProGateway_UddoktaPay', 'addPendingStatus' ) );
+		add_filter( 'pmpro_payment_options', array( 'PMProGateway_UddoktaPay', 'paymentOptions' ) );
+		add_filter( 'pmpro_payment_option_fields', array( 'PMProGateway_UddoktaPay', 'paymentOptionFields' ), 10, 2 );
 
 		$gateway = pmpro_getGateway();
 		if ( 'uddoktapay' === $gateway ) {
 			add_filter( 'pmpro_include_payment_information_fields', '__return_false' );
-			add_filter( 'pmpro_required_billing_fields', array( $this, 'requiredBillingFields' ) );
-			add_filter( 'pmpro_checkout_default_submit_button', array( $this, 'checkoutDefaultSubmitButton' ) );
+			add_filter( 'pmpro_required_billing_fields', array( 'PMProGateway_UddoktaPay', 'requiredBillingFields' ) );
+			add_filter( 'pmpro_checkout_default_submit_button', array( 'PMProGateway_UddoktaPay', 'checkoutDefaultSubmitButton' ) );
 		}
 	}
 
@@ -64,7 +64,7 @@ class PMProGateway_UddoktaPay extends PMProGateway {
 	 * @param  array $gateways List of available gateways.
 	 * @return array Modified list of gateways.
 	 */
-	public function gateways( $gateways ) {
+	public static function gateways( $gateways ) {
 		if ( empty( $gateways['uddoktapay'] ) ) {
 			$gateways['uddoktapay'] = __( 'UddoktaPay', 'pmpro-uddoktapay' );
 		}
@@ -78,7 +78,7 @@ class PMProGateway_UddoktaPay extends PMProGateway {
 	 * @param  array $gateways List of gateways with pending status.
 	 * @return array Modified list of gateways.
 	 */
-	public function addPendingStatus( $gateways ) {
+	public static function addPendingStatus( $gateways ) {
 		$gateways[] = 'uddoktapay';
 		return $gateways;
 	}
@@ -89,7 +89,7 @@ class PMProGateway_UddoktaPay extends PMProGateway {
 	 * @since  1.0.0
 	 * @return array List of gateway options.
 	 */
-	public function getGatewayOptions() {
+	public static function getGatewayOptions() {
 		return array(
 			'sslseal',
 			'nuclear_HTTPS',
@@ -112,7 +112,7 @@ class PMProGateway_UddoktaPay extends PMProGateway {
 	 * @param  bool $ready Initial ready state.
 	 * @return bool True if gateway is configured, false otherwise.
 	 */
-	public function isReady( $ready ) {
+	public static function isReady( $ready ) {
 		if ( '' === get_option( 'pmpro_uddoktapay_display_name' ) ||
 			'' === get_option( 'pmpro_uddoktapay_api_key' ) ||
 			'' === get_option( 'pmpro_uddoktapay_api_url' )
@@ -130,8 +130,8 @@ class PMProGateway_UddoktaPay extends PMProGateway {
 	 * @param  array $options Current payment options.
 	 * @return array Modified payment options.
 	 */
-	public function paymentOptions( $options ) {
-		return array_merge( $this->getGatewayOptions(), $options );
+	public static function paymentOptions( $options ) {
+		return array_merge( self::getGatewayOptions(), $options );
 	}
 
 	/**
@@ -142,7 +142,7 @@ class PMProGateway_UddoktaPay extends PMProGateway {
 	 * @param  string $gateway Current gateway.
 	 * @return void
 	 */
-	public function paymentOptionFields( $values, $gateway ) {
+	public static function paymentOptionFields( $values, $gateway ) {
 		include_once PMPRO_UDDOKTAPAY_DIR . '/src/Views/gateway-settings.php';
 	}
 
@@ -153,7 +153,7 @@ class PMProGateway_UddoktaPay extends PMProGateway {
 	 * @param  array $fields Current required billing fields.
 	 * @return array Modified billing fields.
 	 */
-	public function requiredBillingFields( $fields ) {
+	public static function requiredBillingFields( $fields ) {
 		unset( $fields['baddress1'] );
 		unset( $fields['bcity'] );
 		unset( $fields['bstate'] );
@@ -174,7 +174,7 @@ class PMProGateway_UddoktaPay extends PMProGateway {
 	 * @param  bool $show Whether to show default button.
 	 * @return bool Modified show value.
 	 */
-	public function checkoutDefaultSubmitButton( $show ) {
+	public static function checkoutDefaultSubmitButton( $show ) {
 		global $pmpro_requirebilling;
 		$display_name = get_option( 'pmpro_uddoktapay_display_name' );
 		$button_text  = empty( $display_name ) ? 'Pay with Bangladeshi Methods' : $display_name;
@@ -201,6 +201,6 @@ class PMProGateway_UddoktaPay extends PMProGateway {
 		$order->status       = 'pending';
 		$order->saveOrder();
 
-		return $this->gateway->processPayment( $order );
+		return self::$gateway->processPayment( $order );
 	}
 }

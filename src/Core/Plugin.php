@@ -131,8 +131,9 @@ final class Plugin {
 	 * @since 1.0.0
 	 */
 	private function loadGatewayClass(): void {
-		add_action( 'init', array( new PMProGateway_UddoktaPay(), 'init' ) );
-		add_filter( 'pmpro_is_ready', array( new PMProGateway_UddoktaPay(), 'isReady' ), 999, 1 );
+		new PMProGateway_UddoktaPay();
+		add_action( 'init', array( 'PMProGateway_UddoktaPay', 'init' ) );
+		add_filter( 'pmpro_is_ready', array( 'PMProGateway_UddoktaPay', 'isReady' ), 999, 1 );
 	}
 
 	/**
