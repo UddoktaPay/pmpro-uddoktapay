@@ -25,10 +25,10 @@ jobs:
 
       - name: Prepare plugin folder
         run: |
-          rm -rf pmpro_uddoktapay  # Ensure no previous folder exists
-          mkdir pmpro_uddoktapay
-          rsync -av --progress . pmpro_uddoktapay --exclude pmpro_uddoktapay --exclude .git --exclude .github --exclude .gitignore --exclude composer.json --exclude composer.lock --exclude README.md --exclude LICENSE --exclude .editorconfig --exclude phpcs.xml.dist --exclude vendor/bin
-          zip -r uddoktapay.zip pmpro_uddoktapay
+          rm -rf pmpro-uddoktapay  # Ensure no previous folder exists
+          mkdir pmpro-uddoktapay
+          rsync -av --progress . pmpro-uddoktapay --exclude pmpro-uddoktapay --exclude .git --exclude .github --exclude .gitignore --exclude composer.json --exclude composer.lock --exclude README.md --exclude LICENSE --exclude .editorconfig --exclude phpcs.xml.dist --exclude vendor/bin
+          zip -r uddoktapay.zip pmpro-uddoktapay
 
       - name: Create GitHub release
         uses: softprops/action-gh-release@v2
