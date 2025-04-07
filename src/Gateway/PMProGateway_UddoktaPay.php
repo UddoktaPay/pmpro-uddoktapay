@@ -201,6 +201,6 @@ class PMProGateway_UddoktaPay extends PMProGateway {
 		$order->status       = 'pending';
 		$order->saveOrder();
 
-		return self::$gateway->processPayment( $order );
+		return $this->gateway->processPayment( $order );
 	}
 }
