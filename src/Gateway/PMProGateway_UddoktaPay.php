@@ -21,6 +21,7 @@ use UddoktaPay\PMPro\Gateway\UddoktaPayGateway;
  */
 class PMProGateway_UddoktaPay extends PMProGateway {
 
+
 	/**
 	 * Gateway implementation instance.
 	 *
@@ -195,6 +196,26 @@ class PMProGateway_UddoktaPay extends PMProGateway {
 	public function process( &$order ) {
 		if ( empty( $order->code ) ) {
 			$order->code = $order->getRandomCode();
+		}
+
+		// Check if this is a free order (subtotal is 0.
+		if ( intval( $order->subtotal ) === 0 ) {
+			// Process free membership.
+			$order->getMembershipLevel();
+			$order->status = 'success';
+			$order->notes  = 'Free membership';
+			$order->saveOrder();
+
+			// Change membership level.
+			pmpro_changeMembershipLevel(
+				array(
+					'user_id'       => $order->user_id,
+					'membership_id' => $order->membership_id,
+					'order_id'      => $order->id,
+				)
+			);
+
+			return true;
 		}
 
 		$order->payment_type = 'UddoktaPay';
